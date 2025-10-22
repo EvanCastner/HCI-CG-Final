@@ -51,11 +51,11 @@ Open the local address shown in your terminal (usually http://localhost:5173).
 ### Option 2: Run in GitHub Codespaces  
 - Open this repo in Codespaces  
     (Click the green “Code” button → Open with Codespaces → New Codespace)  
-- Install dependencies:  
-- npm install  
-- Start the server:  
-- npx vite  
-- When the preview port (5173) appears, click “Open in Browser.”
+- Install dependencies:    
+- npm install    
+- Start the server:   
+- npx vite   
+- When the preview port (5173) appears, click “Open in Browser.”  
   
 ---  
 
