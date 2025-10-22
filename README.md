@@ -40,11 +40,11 @@ FinalProject/
    ```bash
    git clone https://github.com/<your-username>/<repo-name>.git
    cd <repo-name>
-Install dependencies:
-npm install
-Start the development server:
-npx vite
-Open the local address shown in your terminal (usually http://localhost:5173).  
+Install dependencies:  
+npm install  
+Start the development server:  
+npx vite  
+Open the local address shown in your terminal (usually http://localhost:5173).    
 
 ---
 
