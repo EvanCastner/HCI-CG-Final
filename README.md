@@ -82,7 +82,7 @@ Open the local address shown in your terminal (usually http://localhost:5173).
 Command	Description  
  - npm install	Installs dependencies
  - npx vite	Starts local dev server  
- -npm run build 
+ - npm run build 
 ### Screenshots (optional)  
 Add screenshots or GIFs here once your 3D scene is running.  
 ### License  
