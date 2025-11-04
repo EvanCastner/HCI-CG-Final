@@ -13,7 +13,7 @@ document.body.appendChild(renderer.domElement);
 // Cube variables
 var geom = new THREE.BoxGeometry(10, 10, 10);
 var mat = new THREE.MeshBasicMaterial({color: "green"});
-var vube = new THREE.Mesh(geom, mat);
+var cube = new THREE.Mesh(geom, mat);
 
 // Create the cube
 scene.add(cube);
@@ -48,6 +48,7 @@ function onDocumentKeyDown(event) {
     render();
 };
 
+// Render the cube
 var render = function() {
     requestAnimationFrame(render);
     cube.rotation.x += 0.03;
