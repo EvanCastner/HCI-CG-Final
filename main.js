@@ -11,7 +11,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Cube variables
-var geom = new THREE.BoxGeometry(1, 1, 1);
+var geom = new THREE.BoxGeometry(1.3, 1.3, 1.3);
 var mat = new THREE.MeshPhongMaterial({color: "red"});
 var cube = new THREE.Mesh(geom, mat);
 
@@ -47,8 +47,9 @@ scene.add(light);
 scene.add(directionalLight);
 
 // movement
-var xSpeed = 1;
-var zSpeed = 1;
+const keys = {};
+const speed = 5;
+const clock = new THREE.Clock();
 
 // Jumping variables
 var yVelocity = 0;
@@ -57,38 +58,42 @@ var jumpStrength = 0.3;
 var isGrounded = true;
 var groundLevel = 0;
 
+//Tracks key status
+document.addEventListener("keydown", (event) => {
+    keys[event.key.toLowerCase()] = true;
 
-document.addEventListener("keydown", onDocumentKeyDown, false);
-function onDocumentKeyDown(event) {
-    var keyCode = event.which;
-    if (keyCode == 87) {                 // W Key
-        cube.position.z -= zSpeed;
-    } else if (keyCode == 83) {          // S Key
-        cube.position.z += zSpeed;
-    } else if (keyCode == 65) {          // A Key
-        cube.position.x -= xSpeed;
-    } else if (keyCode == 68) {          // D Key 
-        cube.position.x += xSpeed;       
-    } else if (keyCode == 32 && isGrounded) {          // Space bar
+    if (event.code == 'Space' && isGrounded) {          
         yVelocity = jumpStrength;
         isGrounded = false;
-    } else if (keyCode == 82) {          // R Key
+    } else if (event.code.toLowerCase() == 'r') {                 
         cube.position.set(0, groundLevel, 0);
         yVelocity = 0;
         isGrounded = true;
     }
-};
+});
+
+document.addEventListener("keyup", (event) => {
+    keys[event.key.toLowerCase()] = false;
+});
 
 // Render the cube
 var render = function() {
-    requestAnimationFrame(render);
-    //cube.rotation.x += 0.002;
-    //cube.rotation.y += 0.003;
-    //cube.rotation.z += 0.001;
+    const delta = clock.getDelta();
+
+    // Smooth WASD
+    if (keys['w'])
+        cube.position.z -= speed * delta;
+    if (keys['s'])
+        cube.position.z += speed * delta;
+    if (keys['a'])
+        cube.position.x -= speed * delta;
+    if (keys['d'])
+        cube.position.x += speed * delta;
 
     // Gravity and jumping
-    yVelocity += gravity;
+    yVelocity += gravity * delta * 60;
     cube.position.y += yVelocity;
+    // Ground Collision
     if (cube.position.y <= groundLevel) {
         cube.position.y = groundLevel;
         yVelocity = 0;
@@ -96,6 +101,7 @@ var render = function() {
     }
 
     renderer.render(scene, camera);
+    requestAnimationFrame(render);
 };
 
 // Start the animation
