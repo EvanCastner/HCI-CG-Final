@@ -28,20 +28,20 @@ scene.add(light);
 scene.add(directionalLight);
 
 // movement
-var xSpeed = 0.05;
-var ySpeed = 0.05;
+var xSpeed = 0.2;
+var ySpeed = 0.2;
 
 document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     var keyCode = event.which;
-    if (keyCode == 87) {
+    if (keyCode == 87) {                 // W Key
         cube.position.y += ySpeed;
-    } else if (keyCode == 83) {
+    } else if (keyCode == 83) {          // S Key
         cube.position.y -= ySpeed;
-    } else if (keyCode == 65) {
-        cube.position.x += xSpeed;
-    } else if (keyCode == 68) {
+    } else if (keyCode == 65) {          // A Key
         cube.position.x -= xSpeed;
+    } else if (keyCode == 68) {          // D Key 
+        cube.position.x += xSpeed;       
     } else if (keyCode == 32) {
         cube.position.set(0, 0, 0);
     }
@@ -50,9 +50,9 @@ function onDocumentKeyDown(event) {
 // Render the cube
 var render = function() {
     requestAnimationFrame(render);
-    cube.rotation.x += 0.03;
-    cube.rotation.y += 0.02;
-    cube.rotation.z += 0.01;
+    cube.rotation.x += 0.0002;
+    cube.rotation.y += 0.0002;
+    cube.rotation.z += 0.0002;
     renderer.render(scene, camera);
 };
 
