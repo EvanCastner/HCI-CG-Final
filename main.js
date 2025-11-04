@@ -11,7 +11,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Cube variables
-var geom = new THREE.BoxGeometry(5, 5, 5);
+var geom = new THREE.BoxGeometry(2, 2, 2);
 var mat = new THREE.MeshPhongMaterial({color: "green"});
 var cube = new THREE.Mesh(geom, mat);
 
@@ -20,6 +20,9 @@ scene.add(cube);
 camera.position.x = 2;
 camera.position.y = 1;
 camera.position.z = 15;
+
+// Change the background color
+renderer.setClearColor(0x87CEEB, 1);    // Sky blue
 
 // Light source and direction
 var light = new THREE.AmbientLight( 0x404040 );                      // soft white light
