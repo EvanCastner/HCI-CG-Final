@@ -40,22 +40,26 @@ FinalProject/
    ```bash
    git clone https://github.com/<your-username>/<repo-name>.git
    cd <repo-name>
-Install dependencies:  
-npm install  
-Start the development server:  
-npx vite  
+2. Install dependencies:
+   ```bash
+   npm install  
+3. Start the development server:
+   ```bash
+   npx vite  
 Open the local address shown in your terminal (usually http://localhost:5173).    
 
 ---
 
 ### Option 2: Run in GitHub Codespaces  
-- Open this repo in Codespaces  
+1. Open this repo in Codespaces  
     (Click the green “Code” button → Open with Codespaces → New Codespace)  
-- Install dependencies:    
-  npm install    
-- Start the server:   
-  npx vite   
-- When the preview port (5173) appears, click “Open in Browser.”  
+2. Install dependencies:
+   ```bash
+   npm install  
+3. Start the development server:
+   ```bash
+   npx vite   
+4. When the preview port (5173) appears, click “Open in Browser.”  
   
 ---  
 
