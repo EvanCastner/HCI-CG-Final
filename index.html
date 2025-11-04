@@ -6,8 +6,6 @@
       body {
         margin: 0;
         padding: 0;
-        overflow: hidden;
-        font-family: Arial, sans-sarif;
       }
 
       canvas {
@@ -15,12 +13,18 @@
       }
     
       .controls {
-        margin-bottom: 10px;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        border-radius: 5px;
+        z-index: 100;
       }
 
       #info {
         margin-top: 10px;
-        color: #333;
+        font-family: Arial, sans-serif;
       }
     </style>
   </head>
@@ -28,11 +32,8 @@
   <body style="margin:0; overflow:hidden;">
       <div class="controls">
         <button id="reset">Reset Position</button>
+        <div id="info">Use WASD to move, Space to reset</div>
       </div>
-      <div id="container">
-        <canvas id="webgl-canvas" width="600" height="400"></canvas>
-        <div id="info">Current Key: None</div>
-      </div>
-      <script src="main.js"></script>
+      <script type="module" src="main.js"></script>
   </body>
 </html>

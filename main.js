@@ -11,8 +11,8 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Cube variables
-var geom = new THREE.BoxGeometry(10, 10, 10);
-var mat = new THREE.MeshBasicMaterial({color: "green"});
+var geom = new THREE.BoxGeometry(5, 5, 5);
+var mat = new THREE.MeshPhongMaterial({color: "green"});
 var cube = new THREE.Mesh(geom, mat);
 
 // Create the cube
@@ -24,11 +24,12 @@ camera.position.z = 15;
 // Light source and direction
 var light = new THREE.AmbientLight( 0x404040 );                      // soft white light
 var directionalLight = new THREE.DirectionalLight( 0xfffff, 0.7 );   //White ligth at 70%
-scene.add( directionalLight );
+scene.add(light);
+scene.add(directionalLight);
 
 // movement
-var xSpeed = 0.0001;
-var ySpeed = 0.0001;
+var xSpeed = 0.05;
+var ySpeed = 0.05;
 
 document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
@@ -44,8 +45,6 @@ function onDocumentKeyDown(event) {
     } else if (keyCode == 32) {
         cube.position.set(0, 0, 0);
     }
-
-    render();
 };
 
 // Render the cube
@@ -56,3 +55,6 @@ var render = function() {
     cube.rotation.z += 0.01;
     renderer.render(scene, camera);
 };
+
+// Start the animation
+render();
