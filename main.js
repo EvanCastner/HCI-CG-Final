@@ -15,11 +15,21 @@ var geom = new THREE.BoxGeometry(2, 2, 2);
 var mat = new THREE.MeshPhongMaterial({color: "green"});
 var cube = new THREE.Mesh(geom, mat);
 
+// Plane variables
+const planeGeom = new THREE.PlaneGeometry(10, 10);
+const planeMaterial = new THREE.MeshStandardMaterial({color: 0xcccccc, side: THREE.DoubleSide});
+const plane = new THREE.Mesh(planeGeom, planeMaterial);
+
 // Create the cube
 scene.add(cube);
 camera.position.x = 2;
 camera.position.y = 1;
 camera.position.z = 15;
+
+// Create the plane
+plane.rotation.x = -Math.PI / 2;
+plane.position.y = -1;
+scene.add(plane);
 
 // Change the background color
 renderer.setClearColor(0x87CEEB, 1);    // Sky blue
