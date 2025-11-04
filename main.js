@@ -42,15 +42,15 @@ scene.add(directionalLight);
 
 // movement
 var xSpeed = 0.2;
-var ySpeed = 0.2;
+var zSpeed = 0.2;
 
 document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     var keyCode = event.which;
     if (keyCode == 87) {                 // W Key
-        cube.position.y += ySpeed;
+        cube.position.z -= zSpeed;
     } else if (keyCode == 83) {          // S Key
-        cube.position.y -= ySpeed;
+        cube.position.z += zSpeed;
     } else if (keyCode == 65) {          // A Key
         cube.position.x -= xSpeed;
     } else if (keyCode == 68) {          // D Key 
