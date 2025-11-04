@@ -11,13 +11,19 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Cube variables
-var geom = new THREE.BoxGeometry(2, 2, 2);
-var mat = new THREE.MeshPhongMaterial({color: "green"});
+var geom = new THREE.BoxGeometry(1, 1, 1);
+var mat = new THREE.MeshPhongMaterial({color: "red"});
 var cube = new THREE.Mesh(geom, mat);
 
 // Plane variables
-const planeGeom = new THREE.PlaneGeometry(10, 10);
-const planeMaterial = new THREE.MeshStandardMaterial({color: 0xcccccc, side: THREE.DoubleSide});
+const planeGeom = new THREE.PlaneGeometry(1000, 1000);
+const planeMaterial = new THREE.MeshStandardMaterial({
+    color: 0x3a7d44,
+    roughness: 0.8,
+    metalness: 0.1,
+    flatShading: true, 
+    side: THREE.DoubleSide
+});
 const plane = new THREE.Mesh(planeGeom, planeMaterial);
 
 // Create the cube
@@ -36,13 +42,13 @@ renderer.setClearColor(0x87CEEB, 1);    // Sky blue
 
 // Light source and direction
 var light = new THREE.AmbientLight( 0x404040 );                      // soft white light
-var directionalLight = new THREE.DirectionalLight( 0xfffff, 0.7 );   //White ligth at 70%
+var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.7 );   //White ligth at 70%
 scene.add(light);
 scene.add(directionalLight);
 
 // movement
-var xSpeed = 0.2;
-var zSpeed = 0.2;
+var xSpeed = 1;
+var zSpeed = 1;
 
 // Jumping variables
 var yVelocity = 0;
