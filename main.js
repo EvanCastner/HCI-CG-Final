@@ -63,9 +63,9 @@ function onDocumentKeyDown(event) {
 // Render the cube
 var render = function() {
     requestAnimationFrame(render);
-    cube.rotation.x += 0.002;
-    cube.rotation.y += 0.003;
-    cube.rotation.z += 0.001;
+    //cube.rotation.x += 0.002;
+    //cube.rotation.y += 0.003;
+    //cube.rotation.z += 0.001;
     renderer.render(scene, camera);
 };
 
