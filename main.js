@@ -44,6 +44,14 @@ scene.add(directionalLight);
 var xSpeed = 0.2;
 var zSpeed = 0.2;
 
+// Jumping variables
+var yVelocity = 0;
+var gravity = -0.01;
+var jumpStrength = 0.3;
+var isGrounded = true;
+var groundLevel = 0;
+
+
 document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     var keyCode = event.which;
@@ -55,8 +63,13 @@ function onDocumentKeyDown(event) {
         cube.position.x -= xSpeed;
     } else if (keyCode == 68) {          // D Key 
         cube.position.x += xSpeed;       
-    } else if (keyCode == 32) {
-        cube.position.set(0, 0, 0);
+    } else if (keyCode == 32 && isGrounded) {          // Space bar
+        yVelocity = jumpStrength;
+        isGrounded = false;
+    } else if (keyCode == 82) {          // R Key
+        cube.position.set(0, groundLevel, 0);
+        yVelocity = 0;
+        isGrounded = true;
     }
 };
 
@@ -66,6 +79,16 @@ var render = function() {
     //cube.rotation.x += 0.002;
     //cube.rotation.y += 0.003;
     //cube.rotation.z += 0.001;
+
+    // Gravity and jumping
+    yVelocity += gravity;
+    cube.position.y += yVelocity;
+    if (cube.position.y <= groundLevel) {
+        cube.position.y = groundLevel;
+        yVelocity = 0;
+        isGrounded = true;
+    }
+
     renderer.render(scene, camera);
 };
 
