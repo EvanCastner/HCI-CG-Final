@@ -9,8 +9,6 @@ The goal of this project is to **experiment with 3D graphics for the web**, lear
 - Add interaction and animation
 - Build and host a web-based visualization using modern JavaScript tools
 
-*(More details about the final project goal, visuals, and interactivity will be added here once the concept is finalized.)*
-
 ---
 
 ## Tech Stack
