@@ -32,5 +32,26 @@ var ySpeed = 0.0001;
 
 document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
+    var keyCode = event.which;
+    if (keyCode == 87) {
+        cube.position.y += ySpeed;
+    } else if (keyCode == 83) {
+        cube.position.y -= ySpeed;
+    } else if (keyCode == 65) {
+        cube.position.x += xSpeed;
+    } else if (keyCode == 68) {
+        cube.position.x -= xSpeed;
+    } else if (keyCode == 32) {
+        cube.position.set(0, 0, 0);
+    }
 
-}
+    render();
+};
+
+var render = function() {
+    requestAnimationFrame(render);
+    cube.rotation.x += 0.03;
+    cube.rotation.y += 0.02;
+    cube.rotation.z += 0.01;
+    renderer.render(scene, camera);
+};
