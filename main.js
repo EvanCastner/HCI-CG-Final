@@ -22,8 +22,8 @@ const plane = new THREE.Mesh(planeGeom, planeMaterial);
 
 // Create the cube
 scene.add(cube);
-camera.position.x = 2;
-camera.position.y = 1;
+camera.position.x = 1;
+camera.position.y = 5;
 camera.position.z = 15;
 
 // Create the plane
