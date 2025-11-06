@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { ThreeMFLoader } from 'three/examples/jsm/Addons.js';
 import { mx_fractal_noise_float } from 'three/src/nodes/TSL.js';
-import { textureLevel } from 'three/tsl';
+import { roughness, textureLevel } from 'three/tsl';
 import { cameraPosition } from 'three/tsl';
 
 // UI Eleements
@@ -73,6 +73,17 @@ directionalLight.shadow.camera.bottom = -50;
 directionalLight.shadow.mapSize.width = 2048;
 directionalLight.shadow.mapSize.height = 2048;
 scene.add(directionalLight);
+
+// Collectibles
+const collectibles = [];
+const collectibleGeometry = new THREE.SphereGeometry(0.5, 16, 16);
+const collectibleMaterial = new THREE.MeshStandardMaterial({
+    color: 0xffff00,
+    emissive: 0xfffff00,
+    emissiveIntensity: 0.5,
+    metalness: 0.3;
+    roughness: 0.4
+});
 
 // movement
 const keys = {};
