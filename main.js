@@ -151,14 +151,13 @@ shadow.rotation.x = -Math.PI / 2;
 shadow.position.y = -0.99;
 scene.add(shadow);
 
-//Tracks key status
+// Event Listener
 document.addEventListener("keydown", (event) => {
     keys[event.key.toLowerCase()] = true;
-
-    if (event.code == 'Space' && isGrounded) {          
+    if (event.code === 'Space' && isGrounded) {
         yVelocity = jumpStrength;
         isGrounded = false;
-    } else if (event.code.toLowerCase() == 'r') {                 
+    } else if (event.key.toLowerCase() === 'r') {
         cube.position.set(0, groundLevel, 0);
         yVelocity = 0;
         isGrounded = true;
