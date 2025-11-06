@@ -56,20 +56,22 @@ plane.position.y = -1;
 plane.receiveShadow = true;
 scene.add(plane);
 
-
-// Create the cube
-scene.add(cube);
-camera.position.x = 1;
-camera.position.y = 5;
-camera.position.z = 15;
-
 // Change the background color
 renderer.setClearColor(0x87CEEB, 1);    // Sky blue
 
 // Light source and direction
-var light = new THREE.AmbientLight( 0x404040 );                      // soft white light
-var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.7 );   //White ligth at 70%
-scene.add(light);
+const ambientLight = new THREE.AmbientLight( 0x404040 );                // soft white light
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.7 );   //White ligth at 70%
+directionalLight.position.set(10, 20, 10);
+directionalLight.castShadow = true;
+directionalLight.shadow.camera.left = -50;
+directionalLight.shadow.camera.right = 50;
+directionalLight.shadow.camera.top = 50;
+directionalLight.shadow.camera.bottom = -50;
+directionalLight.shadow.mapSize.width = 2048;
+directionalLight.shadow.mapSize.height = 2048;
 scene.add(directionalLight);
 
 // movement
