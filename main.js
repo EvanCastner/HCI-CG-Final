@@ -168,6 +168,24 @@ document.addEventListener("keyup", (event) => {
     keys[event.key.toLowerCase()] = false;
 });
 
+// Timer
+const timeInterval = setInterval(() => {
+    if (gameOver)
+        return;
+
+    timeLeft -= 1;
+    timerDisplay.textContent = 'Time: ${timeLeft}s';
+
+    if (timeLeft <= 10) {
+        timerDisplay.style.color = '#ff4444';
+    }
+
+    if (timeLeft <= 0) {
+        gameOver = true;
+        showGameOver();
+    }
+}); 1000;
+
 // Render the cube
 var render = function() {
     const delta = clock.getDelta();
