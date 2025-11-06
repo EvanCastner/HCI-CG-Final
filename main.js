@@ -5,7 +5,7 @@ import { roughness, textureLevel } from 'three/tsl';
 import { cameraPosition } from 'three/tsl';
 
 // UI Eleements
-const scoreDisplay - document.createElement('div');
+const scoreDisplay = document.createElement('div');
 scoreDisplay.style.cssText = 'position: absolute; top 20px; color: white; font-size: 32px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,8); font-family: Arial, sans-serif; z-index:100;';
 scoreDisplay.textContent = 'Score: 0';
 document.body.appendChild(scoreDisplay);
@@ -84,6 +84,20 @@ const collectibleMaterial = new THREE.MeshStandardMaterial({
     metalness: 0.3;
     roughness: 0.4
 });
+
+// Spawn collectibles
+const spawnCollectibles = () => {
+    const collectible = new THREE.Mesh(collectibleGeometry, collectibleMaterial);
+    collectible.position.x = (Math.random() - 0.5) * 80;
+    collectible.position.y = 0;
+    collectible.position.z = (Math.random() - 0.5) * 80;
+    collectible.castShadow = true;
+    scene.add(collectible);
+    collectible.push(collectible);
+}
+
+// Initial collectibles
+
 
 // movement
 const keys = {};
