@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { ThreeMFLoader } from 'three/examples/jsm/Addons.js';
+import { RollerCoasterShadowGeometry, ThreeMFLoader } from 'three/examples/jsm/Addons.js';
 import { mx_fractal_noise_float } from 'three/src/nodes/TSL.js';
 import { roughness, textureLevel } from 'three/tsl';
 import { cameraPosition } from 'three/tsl';
@@ -137,6 +137,19 @@ const gravity = -0.01;
 const jumpStrength = 0.3;
 let isGrounded = true;
 const groundLevel = 0;
+
+// Shadow under the cube
+const shaowGeometry = new THREE.PlaneGeometry(1.5, 1.5);
+const shadowMaterial = new THREE.MeshBasicMaterial({
+    color: 0x000000,
+    transparent: true,
+    opacity: 0.3,
+    side: THREE.DoubleSide
+});
+const shadow = new THREE.Mesh(shaowGeometry, shadowMaterial);
+shadow.rotation.x = -Math.PI / 2;
+shadow.position.y = -0.99;
+scene.add(shadow);
 
 //Tracks key status
 document.addEventListener("keydown", (event) => {
