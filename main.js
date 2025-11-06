@@ -97,7 +97,29 @@ const spawnCollectibles = () => {
 }
 
 // Initial collectibles
+for (let i = 0; i < 20; i++) {
+    spawnCollectibles();
+}
 
+// Particle System
+const particles = [];
+const createParticels = (position) => {
+    const particleGeometry = new THREE.SphereGeometry(0.1, 8, 8);
+    const particleMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+
+    for (let i = 0; i < 10; i++) {
+        const particle = new THREE.Mesh(particleGeometry, particleMaterial);
+        particle.position.copy(position);
+        particle.velocity = new THREE.Vector3(
+            (Math.random() - 0.5) * 0.2,
+            Math.random() * 0.3,
+            (Math.random() - 0.5) * 0.2
+        );
+        particle.life = 1.0;
+        scene.add(particle);
+        particles.push(particle);
+    }
+}
 
 // movement
 const keys = {};
