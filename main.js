@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { ThreeMFLoader } from 'three/examples/jsm/Addons.js';
 import { mx_fractal_noise_float } from 'three/src/nodes/TSL.js';
+import { textureLevel } from 'three/tsl';
 import { cameraPosition } from 'three/tsl';
 
 // UI Eleements
@@ -9,17 +10,36 @@ scoreDisplay.style.cssText = 'position: absolute; top 20px; color: white; font-s
 scoreDisplay.textContent = 'Score: 0';
 document.body.appendChild(scoreDisplay);
 
+const timerDisplay = document.createElement('div');
+timerDisplay.style.cssText = 'position: absolute; top: 20px; right: 20px; color: white; font-size: 32px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); font-family: Arial, sans-serif; z-index: 100;';
+timerDisplay.textContent = 'Time: 60s';
+document.body.appendChild(timerDisplay);
+
+const controlsDisplay = document.createElement('div');
+controlsDisplay.style.cssText = 'position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: white; font-size: 16px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); font-family: Arial, sans-serif; text-align: center; z-index: 100;';
+controlsDisplay.textContent = 'WASD: Move | SPACE: Jump | R: Reset Position';
+document.body.appendChild(controlsDisplay);
+
+// Game stats
+let score = 0;
+let timeLeft = 60;
+let gameOver = false;
+
 // Template 
-var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer( {antialias: true} );
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 
-// Cube variables
-var geom = new THREE.BoxGeometry(1.3, 1.3, 1.3);
-var mat = new THREE.MeshPhongMaterial({color: "red"});
-var cube = new THREE.Mesh(geom, mat);
+// Cube variables (player)
+const geom = new THREE.BoxGeometry(1.3, 1.3, 1.3);
+const mat = new THREE.MeshPhongMaterial({color: "red"});
+const cube = new THREE.Mesh(geom, mat);
+cube.castShadow = true;
+scene.add(cube);
 
 // Plane variables
 const planeGeom = new THREE.PlaneGeometry(1000, 1000);
