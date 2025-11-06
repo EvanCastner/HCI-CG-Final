@@ -186,6 +186,30 @@ const timeInterval = setInterval(() => {
     }
 }); 1000;
 
+// Game over screen
+const showGameOver = () => {
+  const gameOverDiv = document.createElement('div');
+  gameOverDiv.style.cssText = 'position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white; background-color: rgba(0, 0, 0, 0.8); padding: 40px; border-radius: 10px; font-family: Arial, sans-serif; z-index: 200;';
+  
+  const title = document.createElement('h1');
+  title.style.cssText = 'font-size: 48px; margin: 0 0 20px 0;';
+  title.textContent = 'Game Over!';
+  
+  const finalScore = document.createElement('p');
+  finalScore.style.cssText = 'font-size: 32px; margin-bottom: 30px;';
+  finalScore.textContent = `Final Score: ${score}`;
+  
+  const restartButton = document.createElement('button');
+  restartButton.style.cssText = 'font-size: 24px; padding: 15px 40px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;';
+  restartButton.textContent = 'Play Again';
+  restartButton.onclick = () => location.reload();
+  
+  gameOverDiv.appendChild(title);
+  gameOverDiv.appendChild(finalScore);
+  gameOverDiv.appendChild(restartButton);
+  document.body.appendChild(gameOverDiv);
+};
+
 // Render the cube
 var render = function() {
     const delta = clock.getDelta();
