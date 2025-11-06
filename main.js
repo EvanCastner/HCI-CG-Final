@@ -81,7 +81,7 @@ const collectibleMaterial = new THREE.MeshStandardMaterial({
     color: 0xffff00,
     emissive: 0xfffff00,
     emissiveIntensity: 0.5,
-    metalness: 0.3;
+    metalness: 0.3,
     roughness: 0.4
 });
 
@@ -128,15 +128,15 @@ camera.position.z = 15;
 
 // movement
 const keys = {};
-const speed = 5;
+const speed = 8;
 const clock = new THREE.Clock();
 
 // Jumping variables
-var yVelocity = 0;
-var gravity = -0.01;
-var jumpStrength = 0.3;
-var isGrounded = true;
-var groundLevel = 0;
+let yVelocity = 0;
+const gravity = -0.01;
+const jumpStrength = 0.3;
+let isGrounded = true;
+const groundLevel = 0;
 
 //Tracks key status
 document.addEventListener("keydown", (event) => {
