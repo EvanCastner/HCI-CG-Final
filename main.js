@@ -41,8 +41,8 @@ const cube = new THREE.Mesh(geom, mat);
 cube.castShadow = true;
 scene.add(cube);
 
-// Plane variables
-const planeGeom = new THREE.PlaneGeometry(1000, 1000);
+// Plane variables (ground)
+const planeGeom = new THREE.PlaneGeometry(100, 100);
 const planeMaterial = new THREE.MeshStandardMaterial({
     color: 0x3a7d44,
     roughness: 0.8,
@@ -51,17 +51,17 @@ const planeMaterial = new THREE.MeshStandardMaterial({
     side: THREE.DoubleSide
 });
 const plane = new THREE.Mesh(planeGeom, planeMaterial);
+plane.rotation.x = -Math.PI / 2;
+plane.position.y = -1;
+plane.receiveShadow = true;
+scene.add(plane);
+
 
 // Create the cube
 scene.add(cube);
 camera.position.x = 1;
 camera.position.y = 5;
 camera.position.z = 15;
-
-// Create the plane
-plane.rotation.x = -Math.PI / 2;
-plane.position.y = -1;
-scene.add(plane);
 
 // Change the background color
 renderer.setClearColor(0x87CEEB, 1);    // Sky blue
