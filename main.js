@@ -211,7 +211,11 @@ const showGameOver = () => {
 };
 
 // Render the cube
-var render = function() {
+const render = function() {
+    if (gameOver) {
+        return;
+    }
+
     const delta = clock.getDelta();
 
     // Smooth WASD
@@ -224,9 +228,14 @@ var render = function() {
     if (keys['d'])
         cube.position.x += speed * delta;
 
+    // Boundary limits
+    cube.position.x = Math.max(-45, Math.min(45, cube.position.x));
+    cube.position.z = Math.max(-45, Math.min(45, cube.position.z));
+
     // Gravity and jumping
     yVelocity += gravity * delta * 60;
     cube.position.y += yVelocity;
+
     // Ground Collision
     if (cube.position.y <= groundLevel) {
         cube.position.y = groundLevel;
@@ -234,8 +243,21 @@ var render = function() {
         isGrounded = true;
     }
 
-    renderer.render(scene, camera);
-    requestAnimationFrame(render);
+    // Update shadow position
+    shadow.position.x = cube.position.x;
+    shadow.position.z = cube.position.z;
+
+    // Camera follow
+    camera.position.x = cube.position.x + 1;
+    camera.position.z = cube.position.z + 15;
+    camera.position.y = cube.position.y + 5;
+    camera.lookAt(cube.position);
+
+    // Rotate collectibles and make them bob
+    collectible.forEach(collectible => {
+        collectible.rotation.y += delta * 2;
+        collectible.position.y = Math.sin(Date.now() * 0.02 + collectible.position.x) * 0.3;
+    });
 };
 
 // Start the animation
