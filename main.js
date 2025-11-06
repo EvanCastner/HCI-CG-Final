@@ -121,6 +121,11 @@ const createParticels = (position) => {
     }
 }
 
+// Camera setup
+camera.position.x = 1;
+camera.position.y = 5;
+camera.position.z = 15;
+
 // movement
 const keys = {};
 const speed = 5;
