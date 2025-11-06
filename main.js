@@ -3,6 +3,12 @@ import { ThreeMFLoader } from 'three/examples/jsm/Addons.js';
 import { mx_fractal_noise_float } from 'three/src/nodes/TSL.js';
 import { cameraPosition } from 'three/tsl';
 
+// UI Eleements
+const scoreDisplay - document.createElement('div');
+scoreDisplay.style.cssText = 'position: absolute; top 20px; color: white; font-size: 32px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,8); font-family: Arial, sans-serif; z-index:100;';
+scoreDisplay.textContent = 'Score: 0';
+document.body.appendChild(scoreDisplay);
+
 // Template 
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
