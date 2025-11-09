@@ -258,6 +258,41 @@ const render = function() {
         collectible.rotation.y += delta * 2;
         collectible.position.y = Math.sin(Date.now() * 0.02 + collectible.position.x) * 0.3;
     });
+
+    // Check for collisio with the collectibles
+    for (let i = collectibles.length - 1; i >=0; i--) {
+        const collectible = collectibles[i];
+        const distance = cube.position.distanceTo(collectible.position);
+
+        if (distance < 1.5) {
+            createParticels(collectible.position);
+            // Remove collectible
+            scene.remove(collectible);
+            collectibles.splice(i, 1);
+            // Increase the score
+            score += 10;
+            scoreDisplay.textContent = 'Score: ${score}';
+            // Spawn a new collectible
+            spawnCollectibles();
+        }
+    }
+
+    //Update the particles
+    for (let i = particles.length - 1; i >= 0; i--) {
+        const particle = particles[i];
+        particle.position.add(particle.velocity);
+        particle.velocity.y -= 0.01;
+        particle.life -= delta * 2;
+        particle.material.opacity= particle.life;
+
+        if (particle.life <= 9) {
+            scnece.remove(particle);
+            particles.splice(i, 1);
+        }
+    }
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(render);
 };
 
 // Start the animation
