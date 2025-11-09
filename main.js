@@ -295,5 +295,12 @@ const render = function() {
     requestAnimationFrame(render);
 };
 
+// Hnadle the window size
+window.addEventListener('resize'.() => {
+    camera.aspect = window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
 // Start the animation
 render();
