@@ -296,7 +296,7 @@ const render = function() {
 };
 
 // Hnadle the window size
-window.addEventListener('resize'.() => {
+window.addEventListener('resize',() => {
     camera.aspect = window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
