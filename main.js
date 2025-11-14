@@ -6,7 +6,7 @@ import { cameraPosition } from 'three/tsl';
 
 // UI Eleements
 const scoreDisplay = document.createElement('div');
-scoreDisplay.style.cssText = 'position: absolute; top 20px; color: white; font-size: 32px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,8); font-family: Arial, sans-serif; z-index:100;';
+scoreDisplay.style.cssText = 'position: absolute; top: 20px; color: white; font-size: 32px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,8); font-family: Arial, sans-serif; z-index:100;';
 scoreDisplay.textContent = 'Score: 0';
 document.body.appendChild(scoreDisplay);
 
@@ -184,7 +184,7 @@ const timeInterval = setInterval(() => {
         gameOver = true;
         showGameOver();
     }
-} 1000);
+}, 1000);
 
 // Game over screen
 const showGameOver = () => {
