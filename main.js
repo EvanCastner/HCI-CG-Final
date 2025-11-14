@@ -93,7 +93,7 @@ const spawnCollectibles = () => {
     collectible.position.z = (Math.random() - 0.5) * 80;
     collectible.castShadow = true;
     scene.add(collectible);
-    collectible.push(collectible);
+    collectibles.push(collectible);
 }
 
 // Initial collectibles
@@ -103,7 +103,7 @@ for (let i = 0; i < 20; i++) {
 
 // Particle System
 const particles = [];
-const createParticels = (position) => {
+const createParticles = (position) => {
     const particleGeometry = new THREE.SphereGeometry(0.1, 8, 8);
     const particleMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
 
@@ -174,7 +174,7 @@ const timeInterval = setInterval(() => {
         return;
 
     timeLeft -= 1;
-    timerDisplay.textContent = 'Time: ${timeLeft}s';
+    timerDisplay.textContent = `Time: ${timeLeft}s`;
 
     if (timeLeft <= 10) {
         timerDisplay.style.color = '#ff4444';
@@ -184,7 +184,7 @@ const timeInterval = setInterval(() => {
         gameOver = true;
         showGameOver();
     }
-}); 1000;
+} 1000);
 
 // Game over screen
 const showGameOver = () => {
@@ -254,7 +254,7 @@ const render = function() {
     camera.lookAt(cube.position);
 
     // Rotate collectibles and make them bob
-    collectible.forEach(collectible => {
+    collectibles.forEach(collectible => {
         collectible.rotation.y += delta * 2;
         collectible.position.y = Math.sin(Date.now() * 0.02 + collectible.position.x) * 0.3;
     });
@@ -265,13 +265,13 @@ const render = function() {
         const distance = cube.position.distanceTo(collectible.position);
 
         if (distance < 1.5) {
-            createParticels(collectible.position);
+            createParticles(collectible.position);
             // Remove collectible
             scene.remove(collectible);
             collectibles.splice(i, 1);
             // Increase the score
             score += 10;
-            scoreDisplay.textContent = 'Score: ${score}';
+            scoreDisplay.textContent = `Score: ${score}`;
             // Spawn a new collectible
             spawnCollectibles();
         }
@@ -285,8 +285,8 @@ const render = function() {
         particle.life -= delta * 2;
         particle.material.opacity= particle.life;
 
-        if (particle.life <= 9) {
-            scnece.remove(particle);
+        if (particle.life <= 0) {
+            scene.remove(particle);
             particles.splice(i, 1);
         }
     }
