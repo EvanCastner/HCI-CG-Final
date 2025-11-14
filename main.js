@@ -1,8 +1,4 @@
 import * as THREE from 'three';
-import { RollerCoasterShadowGeometry, ThreeMFLoader } from 'three/examples/jsm/Addons.js';
-import { mx_fractal_noise_float } from 'three/src/nodes/TSL.js';
-import { roughness, textureLevel } from 'three/tsl';
-import { cameraPosition } from 'three/tsl';
 
 // UI Eleements
 const scoreDisplay = document.createElement('div');
