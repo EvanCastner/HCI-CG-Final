@@ -135,14 +135,14 @@ let isGrounded = true;
 const groundLevel = 0;
 
 // Shadow under the cube
-const shaowGeometry = new THREE.PlaneGeometry(1.5, 1.5);
+const shadowGeometry = new THREE.PlaneGeometry(1.5, 1.5);
 const shadowMaterial = new THREE.MeshBasicMaterial({
     color: 0x000000,
     transparent: true,
     opacity: 0.3,
     side: THREE.DoubleSide
 });
-const shadow = new THREE.Mesh(shaowGeometry, shadowMaterial);
+const shadow = new THREE.Mesh(shadowGeometry, shadowMaterial);
 shadow.rotation.x = -Math.PI / 2;
 shadow.position.y = -0.99;
 scene.add(shadow);
