@@ -32,7 +32,7 @@ document.body.appendChild(renderer.domElement);
 
 // Cube variables (player)
 const geom = new THREE.BoxGeometry(1.3, 1.3, 1.3);
-const mat = new THREE.MeshPhongMaterial({color: "red"});
+const mat = new THREE.MeshPhongMaterial({color: "blue"});
 const cube = new THREE.Mesh(geom, mat);
 cube.castShadow = true;
 scene.add(cube);
@@ -40,7 +40,7 @@ scene.add(cube);
 // Plane variables (ground)
 const planeGeom = new THREE.PlaneGeometry(100, 100);
 const planeMaterial = new THREE.MeshStandardMaterial({
-    color: 0x3a7d44,
+    color: 0x888888,
     roughness: 0.8,
     metalness: 0.1,
     flatShading: true, 
