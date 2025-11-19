@@ -161,7 +161,6 @@ document.addEventListener("keydown", (event) => {
         isGrounded = false;
     } else if (event.key.toLowerCase() === 'r') {
         pivot.position.set(0, groundLevel, 0);
-        cube.position.set(0, 1.3 / 2, 0);
         yVelocity = 0;
         isGrounded = true;
     }
