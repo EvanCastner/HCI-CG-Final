@@ -37,6 +37,11 @@ const cube = new THREE.Mesh(geom, mat);
 cube.castShadow = true;
 scene.add(cube);
 
+// Rotation variables
+let rollRotation = new THREE.Quaternion();
+const rollSpeed = 0.75;
+const rotationSmoothing = 0.15;
+
 // Plane variables (ground)
 const planeGeom = new THREE.PlaneGeometry(100, 100);
 const planeMaterial = new THREE.MeshStandardMaterial({
@@ -214,6 +219,10 @@ const render = function() {
 
     const delta = clock.getDelta();
 
+    // Store previous position for rolling
+    const prevX = cube.position.x;
+    const prevZ = cube.position.z;
+
     // Smooth WASD
     if (keys['w'])
         cube.position.z -= speed * delta;
@@ -223,6 +232,27 @@ const render = function() {
         cube.position.x -= speed * delta;
     if (keys['d'])
         cube.position.x += speed * delta;
+
+    // Rolling rotation based on movement
+    const deltaX = cube.position.x - prevX;
+    const deltaZ = cube.position.z - prevZ;
+
+    if (isGrounded && (delta !== 0 || deltaZ !== 0)) {
+        const angleX = -deltaZ * rollSpeed;
+        const angleZ = deltaX * rollSpeed;
+
+        // Rotation quarternions for each axis
+        const rotX = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), angleX);
+        const rotZ = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 0, 1), angleZ);
+        rollRotation.multiply(rotX);
+        rollRotation.multiply(rotZ);
+    }
+
+    //Smoothly interpole to target rotation
+    const euler = new THREE.Euler().setFromQuaternion(rollRotation);
+    euler.y = 0;
+    const targetQuat = new THREE.Quaternion().setFromEuler(euler);
+    cube.quaternion.slerp(targetQuat, rotationSmoothing);
 
     // Boundary limits
     cube.position.x = Math.max(-45, Math.min(45, cube.position.x));
