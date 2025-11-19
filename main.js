@@ -42,7 +42,6 @@ const rotationSmoothing = 0.15;
 const pivot = new THREE.Object3D();
 scene.add(pivot);
 pivot.add(cube);
-cube.position.y = 1.3 / 2;
 
 // Plane variables (ground)
 const planeGeom = new THREE.PlaneGeometry(100, 100);
@@ -161,7 +160,8 @@ document.addEventListener("keydown", (event) => {
         yVelocity = jumpStrength;
         isGrounded = false;
     } else if (event.key.toLowerCase() === 'r') {
-        cube.position.set(0, groundLevel, 0);
+        pivot.position.set(0, groundLevel, 0);
+        cube.position.set(0, 1.3 / 2, 0);
         yVelocity = 0;
         isGrounded = true;
     }
@@ -263,11 +263,11 @@ const render = function() {
 
     // Gravity and jumping
     yVelocity += gravity * delta * 60;
-    cube.position.y += yVelocity;
+    pivot.position.y += yVelocity;
 
     // Ground Collision
-    if (cube.position.y <= groundLevel) {
-        cube.position.y = groundLevel;
+    if (pivot.position.y <= groundLevel) {
+        pivot.position.y = groundLevel;
         yVelocity = 0;
         isGrounded = true;
     }
@@ -279,7 +279,7 @@ const render = function() {
     // Camera follow
     camera.position.x = pivot.position.x + 1;    
     camera.position.z = pivot.position.z + 15;   
-    camera.position.y = cube.position.y + 5;
+    camera.position.y = pivot.position.y + 5;
     camera.lookAt(pivot.position);
 
     // Rotate collectibles and make them bob
