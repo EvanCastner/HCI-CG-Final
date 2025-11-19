@@ -35,12 +35,14 @@ const geom = new THREE.BoxGeometry(1.3, 1.3, 1.3);
 const mat = new THREE.MeshPhongMaterial({color: "blue"});
 const cube = new THREE.Mesh(geom, mat);
 cube.castShadow = true;
-scene.add(cube);
 
 // Rotation variables
-let rollRotation = new THREE.Quaternion();
 const rollSpeed = 0.75;
 const rotationSmoothing = 0.15;
+const pivot = new THREE.Object3D();
+scene.add(pivot);
+pivot.add(cube);
+cube.position.y = 1.3 / 2;
 
 // Plane variables (ground)
 const planeGeom = new THREE.PlaneGeometry(100, 100);
@@ -220,43 +222,44 @@ const render = function() {
     const delta = clock.getDelta();
 
     // Store previous position for rolling
-    const prevX = cube.position.x;
-    const prevZ = cube.position.z;
+    const prevX = pivot.position.x;
+    const prevZ = pivot.position.z;
 
     // Smooth WASD
     if (keys['w'])
-        cube.position.z -= speed * delta;
+        pivot.position.z -= speed * delta;
     if (keys['s'])
-        cube.position.z += speed * delta;
+        pivot.position.z += speed * delta;
     if (keys['a'])
-        cube.position.x -= speed * delta;
+        pivot.position.x -= speed * delta;
     if (keys['d'])
-        cube.position.x += speed * delta;
+        pivot.position.x += speed * delta;
 
     // Rolling rotation based on movement
-    const deltaX = cube.position.x - prevX;
-    const deltaZ = cube.position.z - prevZ;
+    const deltaX = pivot.position.x - prevX;
+    const deltaZ = pivot.position.z - prevZ;
 
-    if (isGrounded && (delta !== 0 || deltaZ !== 0)) {
-        const angleX = -deltaZ * rollSpeed;
-        const angleZ = deltaX * rollSpeed;
+    // Rolling on cube edges
+    if (isGrounded && (deltaX !== 0 || deltaZ !== 0 )) {
 
-        // Rotation quarternions for each axis
-        const rotX = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), angleX);
-        const rotZ = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 0, 1), angleZ);
-        rollRotation.multiply(rotX);
-        rollRotation.multiply(rotZ);
+        // Roll forward or backward
+        if (deltaZ !== 0) {
+            const axis = new THREE.Vector3(1, 0, 0);
+            const angle = deltaZ * rollSpeed;
+            pivot.rotateOnWorldAxis(axis, angle);
+        }
+
+        // Roll left or right
+        if (deltaX !== 0) {
+            const axis = new THREE.Vector3(0, 0, 1);
+            const angle = -deltaX * rollSpeed;
+            pivot.rotateOnWorldAxis(axis, angle);
+        }
     }
 
-    //Smoothly interpole to target rotation
-    const euler = new THREE.Euler().setFromQuaternion(rollRotation);
-    euler.y = 0;
-    const targetQuat = new THREE.Quaternion().setFromEuler(euler);
-    cube.quaternion.slerp(targetQuat, rotationSmoothing);
-
     // Boundary limits
-    cube.position.x = Math.max(-45, Math.min(45, cube.position.x));
-    cube.position.z = Math.max(-45, Math.min(45, cube.position.z));
+    pivot.position.x = Math.max(-45, Math.min(45, pivot.position.x));
+    pivot.position.z = Math.max(-45, Math.min(45, pivot.position.z));
 
     // Gravity and jumping
     yVelocity += gravity * delta * 60;
@@ -270,14 +273,14 @@ const render = function() {
     }
 
     // Update shadow position
-    shadow.position.x = cube.position.x;
-    shadow.position.z = cube.position.z;
+    shadow.position.x = pivot.position.x; 
+    shadow.position.z = pivot.position.z; 
 
     // Camera follow
-    camera.position.x = cube.position.x + 1;
-    camera.position.z = cube.position.z + 15;
+    camera.position.x = pivot.position.x + 1;    
+    camera.position.z = pivot.position.z + 15;   
     camera.position.y = cube.position.y + 5;
-    camera.lookAt(cube.position);
+    camera.lookAt(pivot.position);
 
     // Rotate collectibles and make them bob
     collectibles.forEach(collectible => {
@@ -285,10 +288,10 @@ const render = function() {
         collectible.position.y = Math.sin(Date.now() * 0.02 + collectible.position.x) * 0.3;
     });
 
-    // Check for collisio with the collectibles
+    // Check for collision with the collectibles
     for (let i = collectibles.length - 1; i >=0; i--) {
         const collectible = collectibles[i];
-        const distance = cube.position.distanceTo(collectible.position);
+        const distance = pivot.position.distanceTo(collectible.position);
 
         if (distance < 1.5) {
             createParticles(collectible.position);
