@@ -8,6 +8,8 @@ The goal of this project is to **experiment with 3D graphics for the web**, lear
 - Set up a 3D scene (camera, lights, and objects)
 - Add interaction and animation
 - Build and host a web-based visualization using modern JavaScript tools
+  
+![](https://github.com/EvanCastner/HCI-CG-Final/blob/main/WebGLCube.gif) 
 
 ---
 
@@ -80,9 +82,7 @@ Open the local address shown in your terminal (usually http://localhost:5173).
 Command	Description  
  - npm install	Installs dependencies
  - npx vite	Starts local dev server  
- - npm run build 
-### Screenshots   
-![](https://github.com/EvanCastner/HCI-CG-Final/blob/main/WebGLCube.gif)  
+ - npm run build  
 ### License  
 This project is for educational purposes as part of an HCI / graphics-related class assignment.  
 ### Author  
