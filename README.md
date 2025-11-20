@@ -1,4 +1,4 @@
-# 3D Web Visualization Project
+# 3D WebGL Game
 
 ## Overview
 This project is a browser-based 3D visualization built using **Three.js** and **Vite**.  
@@ -61,7 +61,7 @@ Open the local address shown in your terminal (usually http://localhost:5173).
   
 ---  
 
-### Learning Goals (for now)  
+### Learning Goals  
 - Understand the basics of rendering 3D objects in the browser  
 - Learn how to use Three.js to create and manipulate geometry  
 - Gain experience working with modern web development workflows (npm, Vite, GitHub Codespaces)  
@@ -69,10 +69,10 @@ Open the local address shown in your terminal (usually http://localhost:5173).
 
 ---
 
-### Next Steps (to edit later)  
-- Finalize what the 3D scene will represent (robot, environment, visualization, etc.)  
-- Add interactivity (camera controls, object animations, etc.)  
-- Possibly integrate textures, lighting, or imported 3D models (.glb / .gltf)
+### Next Steps  
+- Create more objects to interact with
+- Create a more advanced player character
+- Add difficulty to the level(s)
 
 ---
 
@@ -81,7 +81,7 @@ Command	Description
  - npm install	Installs dependencies
  - npx vite	Starts local dev server  
  - npm run build 
-### Screenshots (optional)  
+### Screenshots   
 Add screenshots or GIFs here once your 3D scene is running.  
 ### License  
 This project is for educational purposes as part of an HCI / graphics-related class assignment.  
