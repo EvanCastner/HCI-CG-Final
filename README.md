@@ -82,7 +82,7 @@ Command	Description
  - npx vite	Starts local dev server  
  - npm run build 
 ### Screenshots   
-Add screenshots or GIFs here once your 3D scene is running.  
+![](https://github.com/EvanCastner/HCI-CG-Final/blob/main/WebGLCube.gif)  
 ### License  
 This project is for educational purposes as part of an HCI / graphics-related class assignment.  
 ### Author  
